@@ -133,6 +133,13 @@ switch ($response) {
 if (extension_loaded('atatus')) {
     atatus_set_app_name("nginx-ingress");
     atatus_add_custom_data("URI", $_SERVER['HTTP_X_ORIGINAL_URI']);
+    atatus_add_custom_data("ContentType", $_SERVER['HTTP_X_FORMAT']);
+    atatus_add_custom_data("Namespace", $_SERVER['HTTP_X_NAMESPACE']);
+    atatus_add_custom_data("IngressName", $_SERVER['HTTP_X_INGRESS_NAME']);
+    atatus_add_custom_data("ServiceName", $_SERVER['HTTP_X_SERVICE_NAME']);
+    atatus_add_custom_data("ServicePort", $_SERVER['HTTP_X_SERVICE_PORT']);
+    atatus_add_custom_data("StatusCode", $_SERVER['HTTP_X_CODE']);
+    atatus_notify_exception($statusCode . ' error on ' . $_SERVER['HTTP_X_ORIGINAL_URI']);
 }
 
 
