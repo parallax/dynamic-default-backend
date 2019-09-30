@@ -131,6 +131,15 @@ switch ($response) {
 
 // If using Atatus, log errors
 if (extension_loaded('atatus')) {
+
+	// Set these conditionally in case the request is actually in-cluster (probably only happens for lets encrypt/cert-manager related ingresses)
+	if (!isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+		$_SERVER['HTTP_X_FORWARDED_PROTO'] = $_SERVER['REQUEST_SCHEME'];
+	}
+	if (!isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+		$_SERVER['HTTP_X_FORWARDED_HOST'] = $_SERVER['HTTP_HOST'];
+	}
+
     atatus_set_app_name("nginx-ingress");
     atatus_add_custom_data("URI", $_SERVER['HTTP_X_ORIGINAL_URI']);
     atatus_add_custom_data("ContentType", $_SERVER['HTTP_X_FORMAT']);
