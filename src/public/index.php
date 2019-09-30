@@ -1,7 +1,12 @@
 <?php
 
 if (!isset($_SERVER['HTTP_X_FORMAT'])) {
-	$_SERVER['HTTP_X_FORMAT'] = 'text/html';
+	if (!isset($_SERVER['HTTP_ACCEPT'])) {
+		$_SERVER['HTTP_X_FORMAT'] = 'text/html';
+	}
+	else {
+		$_SERVER['HTTP_X_FORMAT'] = $_SERVER['HTTP_ACCEPT'];
+	}
 }
 if (!isset($_SERVER['HTTP_X_CODE'])) {
 	$_SERVER['HTTP_X_CODE'] = '404';
