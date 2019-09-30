@@ -37,10 +37,10 @@ spec:
                 - '{{ app }}-{{ branch }}-{{ build }}'
             topologyKey: kubernetes.io/hostname
       volumes:
-        - name: shared-files
-          emptyDir: {}
-        - name: run
-          emptyDir: {}
+      - name: shared-files
+        emptyDir: {}
+      - name: run
+        emptyDir: {}
       containers:
       - name: php
         image: '{{ image:php-fpm }}'

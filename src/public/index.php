@@ -1,6 +1,11 @@
 <?php
 
-print_r($_SERVER); exit;
+if (!isset($_SERVER['HTTP_X_FORMAT'])) {
+	$_SERVER['HTTP_X_FORMAT'] = 'text/html';
+}
+if (!isset($_SERVER['HTTP_X_CODE'])) {
+	$_SERVER['HTTP_X_CODE'] = '404';
+}
 
 // Read in accept headers from Nginx Ingress
 if (strpos($_SERVER['HTTP_X_FORMAT'], 'text/html') !== FALSE) {
