@@ -1,0 +1,3 @@
+FROM prlx/k8s-openresty-php-php:release-php-7.3-latest
+
+ADD /src /src
