@@ -13,4 +13,4 @@ afterDeploy:
     - kind: Deployment
       namePattern: '{{ app }}-{{ branch }}-*'
       nameApartFrom: '{{ app }}-{{ branch }}-{{ build }}'
-      namespace: '{{ namespace }}'
+      namespace: 'ingress-nginx'
