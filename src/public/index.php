@@ -54,6 +54,12 @@ switch ($_SERVER['HTTP_X_CODE']) {
 		$message = "Oops. Something went wrong. Try refreshing - this may be temporary.\nWe've logged the error and will investigate.";
 		break;
 
+	case '503':
+		$statusCode = '503';
+		$title = 'Service Temporarily Unavailable';
+		$message = "Oops. Something went wrong. Try refreshing - this may be temporary.\nWe've logged the error and will investigate.";
+		break;
+
 	case '504':
 		$statusCode = '504';
 		$title = 'Gateway Timeout';
