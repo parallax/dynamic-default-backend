@@ -30,6 +30,18 @@ else {
 
 switch ($_SERVER['HTTP_X_CODE']) {
 
+	case '400':
+		$statusCode = '400';
+		$title = 'Bad Request';
+		$message = "Your request seems to be in a format or using a methid that isn't supported or recognised.\nWe've logged the error and will investigate.";
+		break;
+
+	case '401':
+		$statusCode = '401';
+		$title = 'Unauthorised';
+		$message = "Authentication is required to access this page, please send HTTP Authentication header with your request.\nWe've logged the error and will investigate.";
+		break;
+
 	case '403':
 		$statusCode = '403';
 		$title = 'Forbidden';
@@ -40,6 +52,18 @@ switch ($_SERVER['HTTP_X_CODE']) {
 		$statusCode = '404';
 		$title = 'Not Found';
 		$message = "A 404 error has occurred. This usually means that what you're looking for has moved, been removed or was never at this URL.\nWe've logged the error and will investigate.";
+		break;
+
+	case '405':
+		$statusCode = '405';
+		$title = 'Method Not Allowed';
+		$message = "The HTTP Method you're using isn't allowed on this URL.\nWe've logged the error and will investigate.";
+		break;
+
+	case '429':
+		$statusCode = '429';
+		$title = 'Too Many Requests';
+		$message = "You've exceeded the rate limit for this server. Please wait a while before trying again.\nWe've logged the error and will investigate.";
 		break;
 
 	case '500':
@@ -64,6 +88,12 @@ switch ($_SERVER['HTTP_X_CODE']) {
 		$statusCode = '504';
 		$title = 'Gateway Timeout';
 		$message = "This usually means something has taken too long to respond. You can try refreshing which may fix this issue.\nWe've logged the error and will investigate.";
+		break;
+
+	case '505':
+		$statusCode = '505';
+		$title = 'HTTP Version Not Supported';
+		$message = "The HTTP version you're using is not supported.\nWe've logged the error and will investigate.";
 		break;
 
 	default:
@@ -98,5 +128,12 @@ switch ($response) {
 		include('../text.php');
 		break;
 }
+
+// If using Atatus, log errors
+if (extension_loaded('atatus')) {
+    atatus_set_app_name("nginx-ingress");
+    atatus_add_custom_data("URI", $_SERVER['HTTP_X_ORIGINAL_URI']);
+}
+
 
 ?>
