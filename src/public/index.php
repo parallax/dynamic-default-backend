@@ -139,7 +139,7 @@ if (extension_loaded('atatus')) {
     atatus_add_custom_data("ServiceName", $_SERVER['HTTP_X_SERVICE_NAME']);
     atatus_add_custom_data("ServicePort", $_SERVER['HTTP_X_SERVICE_PORT']);
     atatus_add_custom_data("StatusCode", $_SERVER['HTTP_X_CODE']);
-    atatus_notify_exception($statusCode . ' error on ' . $_SERVER['HTTP_X_ORIGINAL_URI']);
+    atatus_notify_exception($statusCode . ' error on ' . $_SERVER['HTTP_X_FORWARDED_PROTO'] . '://' . $_SERVER['HTTP_X_FORWARDED_HOST'] . $_SERVER['HTTP_X_ORIGINAL_URI']);
 }
 
 
