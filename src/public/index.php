@@ -1,5 +1,7 @@
 <?php
 
+print_r($_SERVER); exit;
+
 // Read in accept headers from Nginx Ingress
 if (strpos($_SERVER['HTTP_X_FORMAT'], 'text/html') !== FALSE) {
 	$response = 'html';
