@@ -1,5 +1,8 @@
 <?php
 
+// Disable any kind of caching
+header("Cache-Control: max-age=1, s-maxage=1, no-cache, must-revalidate, no-store");
+
 if (!isset($_SERVER['HTTP_X_FORMAT'])) {
 	if (!isset($_SERVER['HTTP_ACCEPT'])) {
 		$_SERVER['HTTP_X_FORMAT'] = 'text/html';
